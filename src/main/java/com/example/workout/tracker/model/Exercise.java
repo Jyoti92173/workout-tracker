@@ -1,10 +1,9 @@
-package model;
+package com.example.workout.tracker.model;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "exercises")
-
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

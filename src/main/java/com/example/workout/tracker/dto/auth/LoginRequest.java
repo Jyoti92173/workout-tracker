@@ -1,8 +1,8 @@
-package dto.Auth;
+package com.example.workout.tracker.dto.auth;
 
 import lombok.*;
 
-@Data
+
 @Getter
 @Setter
 @AllArgsConstructor

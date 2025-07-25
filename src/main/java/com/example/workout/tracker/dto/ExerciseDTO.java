@@ -1,4 +1,4 @@
-package dto;
+package com.example.workout.tracker.dto;
 
 public class ExerciseDTO {
     private Long id;

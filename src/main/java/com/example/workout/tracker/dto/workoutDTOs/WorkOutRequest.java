@@ -1,10 +1,11 @@
-package dto.WorkoutDTOs;
+package com.example.workout.tracker.dto.workoutDTOs;
+
+import dto.WorkoutDTOs.WorkoutExerciseDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class WorkoutResponse {
-    private Long workoutId;
+public class WorkOutRequest {
     private String name;
     private LocalDateTime scheduledAt;
     private String comment;

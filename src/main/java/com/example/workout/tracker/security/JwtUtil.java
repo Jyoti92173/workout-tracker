@@ -1,6 +1,9 @@
-package security;
+package com.example.workout.tracker.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,24 +16,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 @Component
 public class JwtUtil {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-    private static final String SECRET_KEY = Base64.getEncoder()
-            .encodeToString("SuperSecureKeyWithMoreThan32Characters!".getBytes());
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+    private static final String SECRET_KEY= Base64.getEncoder().encodeToString("SuperSecureKeyWithMoreThan32Characters!".getBytes());
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
     // Generate the signing key securely
-    private Key getSigningKey() {
+    private static Key getSigningKey() {
         byte[] keyBytes = Base64.getDecoder().decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     // Generate a JWT token
-    public String generateToken(UserDetails userDetails) {
+    public static String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", userDetails.getAuthorities());
 
@@ -43,39 +44,35 @@ public class JwtUtil {
                 .compact();
     }
 
+
     // Validate token by checking username and expiration
-    public boolean validateToken(String token, String username) {
-        try {
-            return username.equals(extractUsername(token)) && !isTokenExpired(token);
-        } catch (JwtException | IllegalArgumentException e) {
-            logger.error("Invalid JWT Token: {}", e.getMessage());
-            return false;
-        }
+    public static boolean validateToken(String token, String username) {
+        return (username.equals(extractUsername(token)) && !isTokenExpired(token));
     }
 
-    // Extract username from the token
-    public String extractUsername(String token) {
+    // Extract username from the token...
+    public static String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extract expiration date
-    public Date extractExpiration(String token) {
+    // Extract expiration date..
+    public static Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }
 
     // Check if token is expired
-    private boolean isTokenExpired(String token) {
+    private static boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    // Extract specific claim using functional interface
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    // Extract claims using a functional approach
+    private static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    // Parse and extract all claims from the token
-    private Claims extractAllClaims(String token) {
+    // Decode and extract all claims from the token
+    private static Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()

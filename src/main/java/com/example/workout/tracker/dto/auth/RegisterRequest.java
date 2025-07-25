@@ -1,4 +1,4 @@
-package dto.Auth;
+package com.example.workout.tracker.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

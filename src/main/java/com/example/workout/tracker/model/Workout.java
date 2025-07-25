@@ -1,12 +1,20 @@
-package model;
+package com.example.workout.tracker.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "workouts")
-
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

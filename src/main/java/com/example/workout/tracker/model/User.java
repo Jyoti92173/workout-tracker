@@ -27,8 +27,8 @@ public class User {
     private String password;
     private String role= "ROLE_USER";
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> workoutList = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<WorkoutExercise> workoutList = new ArrayList<>();
 
 
 

@@ -12,10 +12,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "workout_exercises")
-public class WorkOutExercise {
+
+public class WorkoutExercise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Direct link to User
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "workout_id")

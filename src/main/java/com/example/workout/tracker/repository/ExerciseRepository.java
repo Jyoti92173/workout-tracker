@@ -1,15 +1,15 @@
 package com.example.workout.tracker.repository;
 
+import com.example.workout.tracker.model.Exercise;
 import com.example.workout.tracker.model.User;
-import com.example.workout.tracker.model.Workout;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface WorkoutRepository extends JpaRepository<Workout,Long> {
+public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
-    List<Workout> findByUser(User user);
+    List<Exercise> findByUser(User user);
 
 }

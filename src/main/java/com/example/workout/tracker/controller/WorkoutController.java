@@ -1,11 +1,15 @@
 package com.example.workout.tracker.controller;
 
-import com.example.workout.tracker.dto.workoutDTOs.WorkOutExerciseDTO;
-import com.example.workout.tracker.model.Workout;
-import com.example.workout.tracker.service.WorkoutService;
+import com.example.workout.tracker.dto.workoutDTO.ExerciseUpdateDTO;
+import com.example.workout.tracker.dto.workoutDTO.WorkOutRequestDTO;
+import com.example.workout.tracker.dto.workoutDTO.WorkOutResponseDTO;
+import com.example.workout.tracker.service.WorkOutService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,39 +19,48 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WorkoutController {
 
-    private final WorkoutService workoutService;
-    @PostMapping("/create")
-    public ResponseEntity<Workout> createWorkout(
-            @RequestParam Long userId,
-            @RequestParam String workoutName,
-            @RequestParam(required = false) String comment,
-            @RequestBody List<WorkOutExerciseDTO> exercises) {
+    private final WorkOutService workOutService;
 
-        Workout workout = workoutService.createWorkout(userId, workoutName, comment, exercises);
-        return ResponseEntity.status(HttpStatus.CREATED).body(workout);
+    @PostMapping("/create")
+    public ResponseEntity<WorkOutResponseDTO> createWorkout(@AuthenticationPrincipal UserDetails userDetails,
+                                                            @RequestBody @Valid WorkOutRequestDTO dto) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(workOutService.createWorkout(userDetails.getUsername(), dto));
     }
 
-    @GetMapping("/AllWorkout")
-    public ResponseEntity<List<Workout>> getAllWorkouts() {
-        List<Workout> workouts = workoutService.getAllWorkouts();
-        return ResponseEntity.ok(workouts);
+    // Get all workouts............
+    @GetMapping
+    public ResponseEntity<List<WorkOutResponseDTO>> getWorkouts(
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        return ResponseEntity.ok(workOutService.getWorkouts(userDetails.getUsername()));
     }
 
     // Get workout by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Workout> getWorkoutById(@PathVariable Long id) {
-        Workout workout = workoutService.getWorkoutById(id);
-        if (workout != null) {
-            return ResponseEntity.ok(workout);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<WorkOutResponseDTO> getWorkoutById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        return ResponseEntity.ok(workOutService.getWorkoutById(id, userDetails.getUsername()));
     }
+    // Update exercises
+    @PutMapping("/{id}/exercises")
+    public ResponseEntity<WorkOutResponseDTO> updateWorkout(
+            @PathVariable Long id,
+            @RequestBody ExerciseUpdateDTO request) {
+
+        return ResponseEntity.ok(workOutService.updateWorkoutExercises(id, request));
+    }
+
 
     // Delete workout
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
-        workoutService.deleteWorkout(id);
+        workOutService.deleteWorkout(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }

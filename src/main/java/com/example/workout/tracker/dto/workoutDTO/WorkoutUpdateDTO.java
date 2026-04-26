@@ -1,4 +1,4 @@
-package com.example.workout.tracker.dto.workoutDTOs;
+package com.example.workout.tracker.dto.workoutDTO;
 
 import java.util.List;
 

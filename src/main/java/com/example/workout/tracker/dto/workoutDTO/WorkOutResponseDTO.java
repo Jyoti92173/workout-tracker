@@ -1,6 +1,5 @@
-package com.example.workout.tracker.dto.workoutDTOs;
+package com.example.workout.tracker.dto.workoutDTO;
 
-import com.example.workout.tracker.dto.ExerciseResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,9 @@ public class WorkOutResponseDTO {
     private String workoutName;
     private String comment;
     private LocalDateTime createdAt;
-    private List<ExerciseResponseDTO> exercises;
+
+    private List<WorkOutExerciseDTO> exercises;
+
 
 
 }

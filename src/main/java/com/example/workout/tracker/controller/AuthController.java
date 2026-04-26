@@ -1,9 +1,9 @@
 package com.example.workout.tracker.controller;
 
-import com.example.workout.tracker.dto.auth.AuthResponse;
-import com.example.workout.tracker.dto.auth.LoginRequest;
+import com.example.workout.tracker.dto.auth.AuthResponseDTO;
+import com.example.workout.tracker.dto.auth.LoginRequestDTO;
+import com.example.workout.tracker.dto.auth.RegisterRequestDTO;
 import com.example.workout.tracker.service.AuthService;
-import com.example.workout.tracker.dto.auth.RegisterRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,14 +21,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
-        AuthResponse authResponse = authService.register(request);
+    public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request) {
+        AuthResponseDTO authResponse = authService.register(request);
         return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-        AuthResponse authResponse = authService.login(request);
+    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO LoginRequest) {
+        AuthResponseDTO authResponse = authService.login(LoginRequest);
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }
 }

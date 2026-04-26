@@ -18,10 +18,13 @@ public class WorkoutExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Direct link to User
-    private User user;
+    private int sets;
+    private int reps;
+    private double weight;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false) // Direct link to User
+//    private User user;
 
     @ManyToOne
     @JoinColumn(name = "workout_id")
@@ -31,7 +34,7 @@ public class WorkoutExercise {
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
-    private int sets;
-    private int reps;
-    private double weight;
+
+
+
 }

@@ -1,13 +1,16 @@
 package com.example.workout.tracker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,21 +18,29 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Username is required")
     private String username;
 
-    @Column(unique = true)
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @JsonIgnore
+    @NotBlank(message = "Password is required")
+    @Column(nullable = false)
     private String password;
-    private String role= "ROLE_USER";
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<WorkoutExercise> workoutList = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Workout> workouts;
 
 }

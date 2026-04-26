@@ -1,16 +1,28 @@
 package com.example.workout.tracker.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "exercises")
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
-    private String category;      // e.g., cardio, strength, squat, stretching,balance
-    private String muscleGroup;  // e.g., chest, legs,shoulder,back, arms
+
+    @Enumerated(EnumType.STRING)
+    private Category category;// e.g., CARDIO, STRENGTH, ...
+
+    @Enumerated(EnumType.STRING)
+    private MuscleGroup muscleGroup;// e.g., CHEST, LEGS, ...
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

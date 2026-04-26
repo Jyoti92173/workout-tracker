@@ -1,16 +1,15 @@
 package com.example.workout.tracker.controller;
 
-import com.example.workout.tracker.dto.UserDTO;
+import com.example.workout.tracker.dto.user.UserResponseDTO;
+import com.example.workout.tracker.dto.user.UserUpdateDTO;
 import com.example.workout.tracker.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,45 +18,37 @@ public class UserController {
 
     private final UserService userService;
 
-    // Create a new user (Admin only)
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.createUser(userDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-    }
-
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
-
     // Get current user info
     @GetMapping("/me")
-    public ResponseEntity<UserDTO> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<UserResponseDTO> getMyProfile(@AuthenticationPrincipal UserDetails userDetails) {
         String email = userDetails.getUsername();
-        UserDTO userDTO = userService.getUserByEmail(email);
-        return ResponseEntity.ok(userDTO);
+        return ResponseEntity.ok(userService.getUserByEmail(email));
+
     }
 
     //  Update current user info
     @PutMapping("/me")
-    public ResponseEntity<UserDTO> updateCurrentUser(
+    public ResponseEntity<UserResponseDTO> updateProfile(
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestBody UserDTO updatedUser
+            @RequestBody @Valid UserUpdateDTO userUpdateDTO
     ) {
         String email = userDetails.getUsername();
-        UserDTO updated = userService.updateUser(email, updatedUser);
-        return ResponseEntity.ok(updated);
+
+        return ResponseEntity.ok(userService.updateUser(email, userUpdateDTO));
     }
 
-    // Delete current user
-    @DeleteMapping("/me")
-    public ResponseEntity<Void> deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
-        String email = userDetails.getUsername();
-        userService.deleteUserByEmail(email);
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
+
+            UserResponseDTO user = userService.getUserById(id);
+            return ResponseEntity.ok(user);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 }

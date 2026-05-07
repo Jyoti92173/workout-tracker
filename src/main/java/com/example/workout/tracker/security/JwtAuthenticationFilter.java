@@ -1,5 +1,6 @@
 package com.example.workout.tracker.security;
 
+import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,27 +33,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
+            @Nonnull HttpServletResponse response,
+            @Nonnull FilterChain filterChain
     ) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
 
-        // ✅ Skip JWT for auth endpoints
-        if (uri.contains("/api/auth")) {
+        // ✅ Skip auth endpoints
+        if (uri.startsWith("/api/auth")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String authHeader = request.getHeader("Authorization");
-        String token = null;
-        String username = null;
+        String authHeader = request.getHeader(HEADER);
+
+        // ✅ IMPORTANT FIX
+        if (authHeader == null || !authHeader.startsWith(PREFIX)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String token = authHeader.substring(7);
+        String username;
 
         try {
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                token = authHeader.substring(7);
-                username = jwtUtil.extractUsername(token);
-            }
+            username = jwtUtil.extractUsername(token);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
@@ -68,12 +73,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                             );
 
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                     SecurityContextHolder.getContext().setAuthentication(authToken);
+
+                    logger.info("User authenticated: {}", username);
                 }
             }
 
         } catch (Exception e) {
+            logger.error("JWT Error: {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Token");
             return;
         }

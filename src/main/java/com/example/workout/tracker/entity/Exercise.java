@@ -16,9 +16,11 @@ public class Exercise {
     private String description;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private Category category;// e.g., CARDIO, STRENGTH, ...
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "muscle_group")
     private MuscleGroup muscleGroup;// e.g., CHEST, LEGS, ...
 
     @ManyToOne

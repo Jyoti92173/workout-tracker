@@ -4,20 +4,18 @@ import com.example.workout.tracker.dto.auth.AuthResponseDTO;
 import com.example.workout.tracker.dto.auth.LoginRequestDTO;
 import com.example.workout.tracker.dto.auth.RegisterRequestDTO;
 import com.example.workout.tracker.service.AuthService;
+import com.example.workout.tracker.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-
+    private final UserService userService;
     private final AuthService authService;
 
     @PostMapping("/register")
@@ -31,4 +29,5 @@ public class AuthController {
         AuthResponseDTO authResponse = authService.login(LoginRequest);
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }
+
 }

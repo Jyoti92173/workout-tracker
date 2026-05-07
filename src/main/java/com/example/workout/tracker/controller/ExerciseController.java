@@ -22,12 +22,21 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
 
     // Create exercise
-    @PostMapping
-    public ResponseEntity<ExerciseResponseDTO> createExercise(@Valid @RequestBody ExerciseRequestDTO exerciseRequestDTO) {
-        ExerciseResponseDTO createdExercise = exerciseService.createExercise(exerciseRequestDTO);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(createdExercise);
+    @PostMapping("/create")
+    public ResponseEntity<ExerciseResponseDTO> createExercise
+    (@Valid @RequestBody ExerciseRequestDTO exerciseRequestDTO,
+     @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            throw new RuntimeException("Unauthorized: User not authenticated");
+        }
+
+        String email = userDetails.getUsername();
+
+        ExerciseResponseDTO createdExercise =
+                exerciseService.createExercise(exerciseRequestDTO, email);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
 
     //  Get all exercises

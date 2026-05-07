@@ -2,6 +2,7 @@ package com.example.workout.tracker.controller;
 
 import com.example.workout.tracker.dto.user.UserRegisterDTO;
 import com.example.workout.tracker.dto.user.UserResponseDTO;
+import com.example.workout.tracker.service.AdminUserService;
 import com.example.workout.tracker.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +17,16 @@ import java.util.List;
 @RequestMapping("/api/admin/users")
 @RequiredArgsConstructor
 public class AdminUserController {
-
     private final UserService userService;
+    private final AdminUserService adminUserService;
 
     // Create a new user (Admin only)
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponseDTO> createUser(
             @RequestBody @Valid UserRegisterDTO dto) {
 
-        UserResponseDTO createdUser = userService.createUser(dto);
+        UserResponseDTO createdUser = adminUserService.createUserByAdmin(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
@@ -34,7 +35,7 @@ public class AdminUserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
 
-        List<UserResponseDTO> users = userService.getAllUsers();
+        List<UserResponseDTO> users = adminUserService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 }

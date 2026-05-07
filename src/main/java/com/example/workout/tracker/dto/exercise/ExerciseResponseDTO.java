@@ -1,6 +1,6 @@
 package com.example.workout.tracker.dto.exercise;
 
-import com.example.workout.tracker.model.MuscleGroup;
+import com.example.workout.tracker.entity.MuscleGroup;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,7 @@
 package com.example.workout.tracker.dto.exercise;
 
-import com.example.workout.tracker.model.MuscleGroup;
+import com.example.workout.tracker.entity.Category;
+import com.example.workout.tracker.entity.MuscleGroup;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ExerciseRequestDTO {
     @NotBlank
     private String name;
@@ -19,7 +21,7 @@ public class ExerciseRequestDTO {
     private String description;
 
     @NotNull
-    private String category;
+    private Category category;
 
     @NotNull
     private MuscleGroup muscleGroup;

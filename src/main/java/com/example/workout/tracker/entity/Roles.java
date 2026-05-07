@@ -1,4 +1,4 @@
-package com.example.workout.tracker.model;
+package com.example.workout.tracker.entity;
 
 public enum Roles {
     ROLE_USER,

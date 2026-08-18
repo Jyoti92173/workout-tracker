@@ -48,6 +48,18 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/register.html",
+                                "/dashboard.html",
+                                "/exercises.html",
+                                "/style.css",
+                                "/common.js",
+                                "/auth.js",
+                                "/workout.js",
+                                "/exercises.js"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

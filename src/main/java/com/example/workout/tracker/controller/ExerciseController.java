@@ -51,6 +51,7 @@ public class ExerciseController {
     // Get exercise by ID
     @GetMapping("/{id}")
     public ResponseEntity<ExerciseResponseDTO> getExerciseById(@PathVariable Long id) {
+        
         ExerciseResponseDTO response = exerciseService.getExerciseById(id);
 
         return ResponseEntity.ok(response);

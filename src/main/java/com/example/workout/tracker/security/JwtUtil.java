@@ -30,7 +30,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // 🎯 Generate JWT Token
+    // Generate JWT Token
     public String generateToken(UserDetails userDetails) {
 
         String role = userDetails.getAuthorities()

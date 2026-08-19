@@ -52,7 +52,7 @@ public class JwtUtil {
         return username.equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
-    // 📌 Extract Username (email)
+    // Extract Username (email)
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

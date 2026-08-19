@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "workouts")
-
 public class Workout {
 
     @Id

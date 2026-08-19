@@ -25,7 +25,7 @@ public class JwtUtil {
         this.expirationTime = expirationTime;
     }
 
-    // 🔐 Generate Signing Key
+    // Generate Signing Key
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }

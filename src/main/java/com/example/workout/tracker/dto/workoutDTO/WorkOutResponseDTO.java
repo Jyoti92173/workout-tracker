@@ -14,12 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 
 public class WorkOutResponseDTO {
-    
+
     private Long workoutId;
     private String workoutName;
     private String comment;
     private LocalDateTime createdAt;
-
     private List<WorkOutExerciseDTO> exercises;
 
 

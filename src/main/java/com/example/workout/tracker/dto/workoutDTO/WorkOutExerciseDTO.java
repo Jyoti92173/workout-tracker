@@ -12,7 +12,6 @@ import lombok.Setter;
 
 public class WorkOutExerciseDTO {
     private Long exerciseId;
-
     private int sets;
     private int reps;
     private double weight;

@@ -15,6 +15,5 @@ public class WorkOutRequestDTO {
     private String workoutName;
     private String comment;
     private List<WorkOutExerciseDTO> exercises;
-
-
+    
 }

@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkOutRequestDTO {
-
     private String workoutName;
     private String comment;
     private List<WorkOutExerciseDTO> exercises;

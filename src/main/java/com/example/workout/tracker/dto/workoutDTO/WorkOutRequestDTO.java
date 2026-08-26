@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkOutRequestDTO {
-    
+
     private String workoutName;
     private String comment;
     private List<WorkOutExerciseDTO> exercises;

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class WorkOutResponseDTO {
+    
     private Long workoutId;
     private String workoutName;
     private String comment;

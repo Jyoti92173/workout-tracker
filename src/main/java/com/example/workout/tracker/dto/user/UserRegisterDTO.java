@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class UserRegisterDTO {
+    
     @NotBlank
     private String username;
 

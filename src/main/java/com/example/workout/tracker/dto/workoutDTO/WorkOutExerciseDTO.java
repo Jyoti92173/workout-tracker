@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class WorkOutExerciseDTO {
+    
     private Long exerciseId;
     private int sets;
     private int reps;

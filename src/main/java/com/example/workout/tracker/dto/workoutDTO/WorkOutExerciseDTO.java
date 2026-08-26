@@ -15,5 +15,5 @@ public class WorkOutExerciseDTO {
     private int sets;
     private int reps;
     private double weight;
-    
+
 }

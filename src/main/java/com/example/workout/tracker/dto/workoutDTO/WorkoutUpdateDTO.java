@@ -5,6 +5,5 @@ import java.util.List;
 public class WorkoutUpdateDTO {
     private String workoutName;
     private String comment;
-
     private List<ExerciseUpdateDTO> exercises;
 }

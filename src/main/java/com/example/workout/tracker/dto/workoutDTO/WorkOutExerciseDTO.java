@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class WorkOutExerciseDTO {
     private Long exerciseId;
 

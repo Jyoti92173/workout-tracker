@@ -44,6 +44,7 @@ public class WorkoutController{
 
         return ResponseEntity.ok(workOutService.getWorkoutById(id, userDetails.getUsername()));
     }
+    
     // Update exercises
     @PutMapping("/{id}/exercises")
     public ResponseEntity<WorkOutResponseDTO> updateWorkout(

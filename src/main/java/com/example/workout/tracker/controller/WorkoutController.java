@@ -21,8 +21,7 @@ public class WorkoutController{
     private final WorkOutService workOutService;
 
     @PostMapping("/create")
-    public ResponseEntity<WorkOutResponseDTO> createWorkout(@AuthenticationPrincipal UserDetails userDetails,
-                                                            @RequestBody @Valid WorkOutRequestDTO dto) {
+    public ResponseEntity<WorkOutResponseDTO> createWorkout(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid WorkOutRequestDTO dto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(workOutService.createWorkout(userDetails.getUsername(), dto));

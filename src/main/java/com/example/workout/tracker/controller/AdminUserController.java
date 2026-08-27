@@ -30,7 +30,7 @@ public class AdminUserController{
         UserResponseDTO createdUser = adminUserService.createUserByAdmin(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
-    
+
     // List all users (Admin only)
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")

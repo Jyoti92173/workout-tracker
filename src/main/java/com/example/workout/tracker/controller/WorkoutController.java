@@ -44,7 +44,7 @@ public class WorkoutController{
 
         return ResponseEntity.ok(workOutService.getWorkoutById(id, userDetails.getUsername()));
     }
-    
+
     // Update exercises
     @PutMapping("/{id}/exercises")
     public ResponseEntity<WorkOutResponseDTO> updateWorkout(
@@ -53,8 +53,7 @@ public class WorkoutController{
 
         return ResponseEntity.ok(workOutService.updateWorkoutExercises(id, request));
     }
-
-
+    
     // Delete workout
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {

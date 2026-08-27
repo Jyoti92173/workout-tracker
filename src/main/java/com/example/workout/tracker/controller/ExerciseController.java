@@ -38,7 +38,6 @@ public class ExerciseController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExercise);
     }
-
     //  Get all exercises
     @GetMapping
     public  ResponseEntity<List<ExerciseResponseDTO>> getAllExercises(

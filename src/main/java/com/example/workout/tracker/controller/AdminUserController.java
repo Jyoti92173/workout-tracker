@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/admin/users")
 @RequiredArgsConstructor
 public class AdminUserController{
-    
+
     private final UserService userService;
     private final AdminUserService adminUserService;
 
@@ -30,7 +30,6 @@ public class AdminUserController{
         UserResponseDTO createdUser = adminUserService.createUserByAdmin(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
-
     // List all users (Admin only)
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")

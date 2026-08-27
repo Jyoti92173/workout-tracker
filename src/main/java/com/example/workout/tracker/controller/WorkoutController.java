@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/workouts")
 @RequiredArgsConstructor
 public class WorkoutController{
+    
     private final WorkOutService workOutService;
 
     @PostMapping("/create")
@@ -53,7 +54,7 @@ public class WorkoutController{
 
         return ResponseEntity.ok(workOutService.updateWorkoutExercises(id, request));
     }
-    
+
     // Delete workout
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {

@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/workouts")
 @RequiredArgsConstructor
 public class WorkoutController{
-    
+
     private final WorkOutService workOutService;
 
     @PostMapping("/create")

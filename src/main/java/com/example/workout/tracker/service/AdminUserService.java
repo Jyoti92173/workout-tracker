@@ -8,6 +8,5 @@ import java.util.List;
 public interface AdminUserService {
 
     UserResponseDTO createUserByAdmin(UserRegisterDTO dto);
-
     List<UserResponseDTO> getAllUsers();
 }

@@ -18,6 +18,5 @@ public interface ExerciseService  {
     ExerciseResponseDTO getExerciseById(Long id);
 
     ExerciseResponseDTO updateExercise(Long id, ExerciseUpdateDTO request);
-
     void deleteExercise(Long id);
 }

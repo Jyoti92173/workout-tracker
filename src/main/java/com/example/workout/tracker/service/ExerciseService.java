@@ -12,7 +12,6 @@ public interface ExerciseService  {
 
 
     ExerciseResponseDTO createExercise(@Valid ExerciseRequestDTO exerciseRequestDTO, String email);
-
     List<ExerciseResponseDTO> getAllExercises(String email);
     ExerciseResponseDTO getExerciseById(Long id);
     ExerciseResponseDTO updateExercise(Long id, ExerciseUpdateDTO request);

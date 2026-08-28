@@ -8,7 +8,6 @@ import com.example.workout.tracker.dto.user.UserUpdateDTO;
 import java.util.List;
 
 public interface UserService {
-    
     UserResponseDTO createUser(UserRegisterDTO dto);
     UserResponseDTO createUserByAdmin(UserRegisterDTO dto);
     List<UserResponseDTO> getAllUsers();

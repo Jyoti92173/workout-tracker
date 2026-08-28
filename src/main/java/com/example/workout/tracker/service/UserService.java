@@ -15,7 +15,6 @@ public interface UserService {
     UserResponseDTO createUserByAdmin(UserRegisterDTO dto);
 
     List<UserResponseDTO> getAllUsers();
-    
     UserResponseDTO getUserByEmail(String email);
     UserResponseDTO updateUser(String email, UserUpdateDTO dto);
     UserResponseDTO getUserById(Long id);

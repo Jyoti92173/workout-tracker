@@ -11,7 +11,6 @@ public interface UserService {
 
 
     UserResponseDTO createUser(UserRegisterDTO dto);
-
     UserResponseDTO createUserByAdmin(UserRegisterDTO dto);
     List<UserResponseDTO> getAllUsers();
     UserResponseDTO getUserByEmail(String email);

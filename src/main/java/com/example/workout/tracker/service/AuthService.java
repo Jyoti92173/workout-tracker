@@ -8,6 +8,5 @@ import com.example.workout.tracker.dto.auth.RegisterRequestDTO;
 public interface AuthService {
 
     AuthResponseDTO register(RegisterRequestDTO request);
-
     AuthResponseDTO login(LoginRequestDTO loginRequest);
 }

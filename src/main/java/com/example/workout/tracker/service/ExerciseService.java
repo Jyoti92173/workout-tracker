@@ -9,8 +9,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 public interface ExerciseService  {
-
-
+    
     ExerciseResponseDTO createExercise(@Valid ExerciseRequestDTO exerciseRequestDTO, String email);
     List<ExerciseResponseDTO> getAllExercises(String email);
     ExerciseResponseDTO getExerciseById(Long id);

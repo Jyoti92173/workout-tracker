@@ -20,7 +20,6 @@ public interface UserService {
     UserResponseDTO getUserByEmail(String email);
 
     UserResponseDTO updateUser(String email, UserUpdateDTO dto);
-
     UserResponseDTO getUserById(Long id);
     void deleteUser(Long id);
 

@@ -14,7 +14,6 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     private final UserService userService;
 
-
     @Override
     public UserResponseDTO createUserByAdmin(UserRegisterDTO dto) {
         return userService.createUserByAdmin(dto);

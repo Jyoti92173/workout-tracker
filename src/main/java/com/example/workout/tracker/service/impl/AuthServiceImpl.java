@@ -69,6 +69,5 @@ public class AuthServiceImpl implements AuthService {
         return new AuthResponseDTO(token,user.getEmail(),
                 user.getRole().name(), "Login successful");
     }
-
-
+    
 }

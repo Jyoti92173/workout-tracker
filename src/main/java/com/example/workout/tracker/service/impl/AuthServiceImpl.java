@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponseDTO register(RegisterRequestDTO request) {
-        
+
         // Check if email already exists
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already registered");
@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Roles.ROLE_USER);  // Hardcoded role for now
 
-        // Save user
+        // Save use
         userRepository.save(user);
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User

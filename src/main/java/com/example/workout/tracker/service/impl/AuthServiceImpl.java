@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Roles.ROLE_USER);  // Hardcoded role for now
 
-        // Save us
+        // Save u
         userRepository.save(user);
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User

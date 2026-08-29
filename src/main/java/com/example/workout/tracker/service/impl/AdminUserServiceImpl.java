@@ -23,5 +23,5 @@ public class AdminUserServiceImpl implements AdminUserService{
     public List<UserResponseDTO> getAllUsers() {
         return userService.getAllUsers();
     }
-    
+
 }

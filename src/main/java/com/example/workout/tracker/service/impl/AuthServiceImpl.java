@@ -53,7 +53,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     // For login Request........
-
     public AuthResponseDTO login(LoginRequestDTO request) {
 
         // Authenticate credentials

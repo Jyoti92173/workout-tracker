@@ -38,14 +38,13 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Roles.ROLE_USER);  // Hardcoded role for now
-        
+
         userRepository.save(user);
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
                 .authorities(user.getRole().name())
-
                 .build();
 
         String token = jwtUtil.generateToken(userDetails);

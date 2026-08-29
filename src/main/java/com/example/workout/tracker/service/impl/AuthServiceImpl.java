@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 user.getRole().name(), "Registration successful");
     }
 
-    // For login Request.........
+    // For login Request..........
     public AuthResponseDTO login(LoginRequestDTO request) {
         // Authenticate credentials
         Authentication authentication = authenticationManager.authenticate(
